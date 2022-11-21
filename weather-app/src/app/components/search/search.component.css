@@ -1,0 +1,47 @@
+.main-wrapper {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-width: 32rem;
+    min-height: 25rem;
+}
+
+.search-bar {
+    margin-right: 20px;
+}
+
+.drop-down {
+    min-width: 220px;
+    position: absolute;
+    top: 79px;
+    z-index: 2;
+    right: 267px;
+    background-color: white;
+    box-shadow: 1px 5px 4px lightgrey;
+}
+
+.city-option {
+    padding: 15px;
+    cursor: pointer;
+}
+
+.city-option:hover {
+    background-color: lightgrey;
+}
+
+.drop-down .city-option:not(:first-child):not(:last-child) {
+    border-top: 1px solid grey
+}
+
+.drop-down .city-option:last-child {
+    border-top: 1px solid grey
+}
+
+.weather-data {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}

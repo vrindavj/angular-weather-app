@@ -1,1 +1,41 @@
-<p>search works!</p>
+<mat-card class="main-wrapper">
+    <div class="search-toggle-container">
+        <mat-form-field appearance="fill" class="search-bar">
+            <input matInput placeholder="Search by city" [(ngModel)]="city" />
+        </mat-form-field>
+        <mat-button-toggle-group (click)="toggleHandler()" [(ngModel)]="unit" aria-label="Font Style">
+            <mat-button-toggle value="metric">°C</mat-button-toggle>
+            <mat-button-toggle value="imperial">°F</mat-button-toggle>
+        </mat-button-toggle-group>
+    </div>
+    <ng-template [ngIf]="showDropDown">
+        <div class="drop-down">
+            <div class="city-option" *ngFor="let city of cityList" (click)="selectCity(city)">
+                {{ city.name }} &nbsp;&nbsp; {{ city.sys.country }}
+            </div>
+        </div>
+    </ng-template>
+    <button (click)="submitHandler($event)" type="submit" mat-raised-button color="primary">
+    Search
+  </button>
+
+    <div *ngIf="cityObject.name !== ''; then weatherData; else errorData"></div>
+    <ng-template #weatherData>
+        <div class="weather-data">
+            <div class="location">
+                {{ cityObject.name }}, {{ cityObject.country }}
+            </div>
+            <div class="location">
+                {{ cityObject.temp }}
+            </div>
+            <div class="sub-text">
+                feels like {{ cityObject.feelsLike }}
+            </div>
+        </div>
+    </ng-template>
+    <ng-template #errorData>
+        <span>
+            {{errorMessage}}
+        </span>
+    </ng-template>
+</mat-card>
