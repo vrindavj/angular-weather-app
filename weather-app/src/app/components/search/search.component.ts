@@ -41,12 +41,9 @@ export class SearchComponent {
     retrievedObject = localStorage.getItem('cityWeatherDetails'); // getting storage object
     if (retrievedObject) {
       const weatherDetails: cityDataObj = JSON.parse(retrievedObject);
-      this.cityObject = {
-        name: weatherDetails.name,
-        feelsLike: weatherDetails.feelsLike,
-        country: weatherDetails.country,
-        temp: weatherDetails.temp,
-      };
+      // console.log(weatherDetails);
+      this.city = `${weatherDetails.name},${weatherDetails.country}`;
+      this.toggleHandler();
     }
   }
 
@@ -115,6 +112,8 @@ export class SearchComponent {
 
   /**
    * function to fetch weather details when toggle button for unit change is clicked
+   * It directly sets first object from weatherdata array into cityObject
+   * also resued inside ngOnInit
    */
   toggleHandler() {
     this.weatherService
@@ -142,7 +141,7 @@ export class SearchComponent {
   }
 
   /**
-   * Function called when city name dropdown option is selected
+   * This fn is called when an option is selected from city dropdown
    * @param city - name of the selected city
    */
   selectCity(city: any) {
@@ -152,6 +151,6 @@ export class SearchComponent {
     this.cityObject.feelsLike = `${city.main.feels_like} ${unit}`;
     this.cityObject.temp = `${city.main.temp} ${unit}`;
     this.cityObject.country = city.sys.country;
-    localStorage.setItem('cityWeatherDetails', JSON.stringify(this.cityObject));
+    localStorage.setItem('cityWeatherDetails', JSON.stringify(this.cityObject)); // selected city data stored to LS
   }
 }

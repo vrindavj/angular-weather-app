@@ -178,7 +178,11 @@ describe('SearchComponent', () => {
       },
     ],
   };
-
+  let event = {
+    type: 'click',
+    stopPropagation: function () {},
+    preventDefault: function () {},
+  };
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [SearchComponent],
@@ -276,6 +280,7 @@ describe('SearchComponent', () => {
       return of(apiDataOulu);
     });
     component.city = 'oulu';
+
     component.searchHandler(event);
     expect(component.showDropDown).toEqual(true);
     fixture.detectChanges();

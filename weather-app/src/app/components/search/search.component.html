@@ -1,7 +1,7 @@
 <mat-card class="main-wrapper">
     <div class="search-toggle-container">
         <mat-form-field appearance="fill" class="search-bar">
-            <input matInput id="cityInput" placeholder="Search by city" [(ngModel)]="city" />
+            <input matInput (keyDown.enter)="searchHandler($event)" id="cityInput" placeholder="Search by city" [(ngModel)]="city" />
         </mat-form-field>
         <mat-button-toggle-group id='unitToggleBtn' (click)="toggleHandler()" [(ngModel)]="unit" aria-label="temperature unit">
             <mat-button-toggle id='metric' value="metric">°C</mat-button-toggle>
