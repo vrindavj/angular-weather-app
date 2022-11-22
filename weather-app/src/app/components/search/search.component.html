@@ -1,21 +1,21 @@
 <mat-card class="main-wrapper">
     <div class="search-toggle-container">
         <mat-form-field appearance="fill" class="search-bar">
-            <input matInput placeholder="Search by city" [(ngModel)]="city" />
+            <input matInput id="cityInput" placeholder="Search by city" [(ngModel)]="city" />
         </mat-form-field>
-        <mat-button-toggle-group (click)="toggleHandler()" [(ngModel)]="unit" aria-label="Font Style">
-            <mat-button-toggle value="metric">°C</mat-button-toggle>
-            <mat-button-toggle value="imperial">°F</mat-button-toggle>
+        <mat-button-toggle-group id='unitToggleBtn' (click)="toggleHandler()" [(ngModel)]="unit" aria-label="temperature unit">
+            <mat-button-toggle id='metric' value="metric">°C</mat-button-toggle>
+            <mat-button-toggle id='imperial' value="imperial">°F</mat-button-toggle>
         </mat-button-toggle-group>
     </div>
     <ng-template [ngIf]="showDropDown">
         <div class="drop-down">
-            <div class="city-option" *ngFor="let city of cityList" (click)="selectCity(city)">
+            <div class="city-option" [id]="'city-option-'+city.id" *ngFor="let city of cityList" (click)="selectCity(city)">
                 {{ city.name }} &nbsp;&nbsp; {{ city.sys.country }}
             </div>
         </div>
     </ng-template>
-    <button (click)="submitHandler($event)" type="submit" mat-raised-button color="primary" class="submit-btn">
+    <button id='submitBtn' (click)="searchHandler($event)" type="submit" mat-raised-button color="primary" class="submit-btn" aria-label="submit">
     Search
   </button>
 

@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class WeatherService {
   apiKey: string = '1cb6ace31e50401f28b864f0b23fdc68';
   URL: string = `http://api.openweathermap.org/data/2.5/find?appid=${this.apiKey}&q=`;
-  constructor(private http: HttpClient) {}
+  constructor(public http: HttpClient) {}
 
   /**
    * Function to call the weather api

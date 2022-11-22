@@ -1,12 +1,32 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-
+import { SearchComponent } from './components/search/search.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { WeatherService } from './services/weather.service';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        AppComponent
+      declarations: [AppComponent, SearchComponent],
+      imports: [
+        HttpClientTestingModule,
+        MatButtonModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatButtonToggleModule,
+        MatInputModule,
+        FormsModule,
+        BrowserModule,
+        BrowserAnimationsModule,
       ],
+      providers: [WeatherService],
     }).compileComponents();
   });
 
@@ -26,6 +46,14 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('weather-app app is running!');
+    expect(compiled.querySelector('h2')?.textContent).toContain(
+      'Weather application'
+    );
+  });
+  it('should display search component', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('app-search')).toBeTruthy();
   });
 });

@@ -56,7 +56,7 @@ export class SearchComponent {
    * @param list - array of city object fetched from api
    * @param event - event details about click event
    */
-  handleFetchedData(list: any[], event: any) {
+  handleFetchedData(list: any, event: any) {
     if (list.length > 1) {
       this.showDropDown = true;
       event.stopPropagation();
@@ -79,11 +79,12 @@ export class SearchComponent {
    * Function to handle click event on submit button.
    * @param event - event details about click event
    */
-  submitHandler(event: any) {
+  searchHandler(event: any) {
     if (this.city !== '') {
       this.weatherService.fetchWeatherData(this.city, this.unit).subscribe({
         next: (data: any) => {
           this.cityList = data.list;
+          // console.log(this.cityList.length, 'CITY LENGTH');
         },
         error: (err) => {
           this.cityList = [];
@@ -135,7 +136,6 @@ export class SearchComponent {
         error: (err) => {
           this.cityList = [];
           this.errorMessage = 'No city found';
-          console.log(this.cityList, 'error');
         },
         complete: () => {},
       });
